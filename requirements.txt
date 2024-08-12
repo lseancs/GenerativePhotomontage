@@ -1,0 +1,11 @@
+diffusers==0.22.0
+accelerate==0.22.0
+gradio==4.13.0
+controlnet-aux==0.0.1
+torchinfo
+chardet
+matplotlib
+safetensors
+transformers
+opencv-python
+scikit-learn
