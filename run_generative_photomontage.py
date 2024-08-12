@@ -170,6 +170,10 @@ if __name__ == '__main__':
     parser.add_argument("--cond", type=str, required=True, default="data/applelogo-canny.png", help="Input condition image with the format {NAME}-{MODEL}.png")
     parser.add_argument("--prompts", type=str, nargs="+", default="A rock on grass", help="One prompt for all images, or one prompt per image")
     parser.add_argument("--seeds", type=int, nargs="+", default=0, help="List of seeds, one for each image")
+    parser.add_argument("--mask_suffix", type=str, nargs="+", default=None, 
+                        help="List of mask file suffixes, one for each image. \
+                              Specify a mask file suffix to select between multiple masks (for the same image).  \
+                              For example: \"--mask_suffix alt . .\" for three images, where the first one's mask file suffix is \"alt\".")
 
     args = parser.parse_args()
     
@@ -181,10 +185,19 @@ if __name__ == '__main__':
     if len(args.prompts) > 1:
        assert len(args.prompts) == len(args.seeds), "Number of prompts ({}) should be 1 or equal to the number of seeds ({})".format(len(args.prompts), len(args.seeds))
 
+    # Checks number of mask file suffixes:
+    if args.mask_suffix is not None:
+        assert len(args.mask_suffix) == len(args.seeds), "There are {} images, but only {} suffixes. \
+                                                          Please specify suffixes for all images; use \".\" to skip an image.".format(len(args.seeds), len(args.mask_suffix))
+
+    
     # Checks if stroke masks are in correct folder.
     info_str = ""
     for i, seed in enumerate(args.seeds):
-        stroke_mask_file = get_mask_file(name, model, args.prompts[i] if len(args.prompts) > 1 else args.prompts[0], seed)
+        suffix = None
+        if args.mask_suffix is not None:
+            suffix = args.mask_suffix[i]
+        stroke_mask_file = get_mask_file(name, model, args.prompts[i] if len(args.prompts) > 1 else args.prompts[0], seed, mask_suffix=suffix)
         if not os.path.isfile(stroke_mask_file):
             print("\nERROR: Stroke mask is missing: {}.".format(stroke_mask_file))
             print("Please make sure you have a stroke mask for each image, saved in {}/NAME/MODEL/PROMPT/masks. Filenames should have the format \"mask_SEED.png\"".format(
@@ -193,7 +206,7 @@ if __name__ == '__main__':
         info_str += "Prompt: {}, Seed={}\n".format(args.prompts[i] if len(args.prompts) > 1 else args.prompts[0], seed)
 
     print("Running graph cut on:\n{}".format(info_str))
-    compute_graph_cut(name, model, args.prompts, args.seeds)
+    compute_graph_cut(name, model, args.prompts, args.seeds, args.mask_suffix)
     print("Done.")
 
     print("Blending with graph-cut results...")

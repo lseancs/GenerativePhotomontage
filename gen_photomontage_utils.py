@@ -4,10 +4,12 @@ import shutil
 BASE_MODEL_PATH = "runwayml/stable-diffusion-v1-5"
 NUM_INFERENCE_STEPS = 20
 
-def get_mask_file(shape, model_type, prompt, seed, gc=False):
+def get_mask_file(shape, model_type, prompt, seed, gc=False, mask_suffix=None):
   suffix = ""
   if gc:
     suffix += "_gc"
+  if mask_suffix is not None and mask_suffix != ".":
+    suffix += "_{}".format(mask_suffix)
   fn = os.path.join(COMPOSITE_DIR,
                        shape,
                        model_type,
@@ -44,7 +46,7 @@ def get_vanilla_image_file(shape, model_type, prompt, seed):
                       "seed{}.png".format(seed))
   return fn
 
-def compute_graph_cut(shape, model_type, prompts, seeds):
+def compute_graph_cut(shape, model_type, prompts, seeds, mask_suffix=None):
   if len(prompts) == 1:
     prompts = prompts * len(seeds)
   elif len(prompts) > len(seeds):
@@ -68,7 +70,10 @@ def compute_graph_cut(shape, model_type, prompts, seeds):
                           "down_blocks.0.attentions.0.transformer_blocks.0.attn1.processor.pth")
     ks.append(k_file)
 
-    s_file = get_mask_file(shape, model_type, prompts[i], seed)
+    suffix = None
+    if mask_suffix is not None:
+        suffix = mask_suffix[i]
+    s_file = get_mask_file(shape, model_type, prompts[i], seed, mask_suffix=suffix)
     s_files.append(s_file)
 
   h, w, c = np.array(Image.open(images[0])).shape
