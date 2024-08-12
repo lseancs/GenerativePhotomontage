@@ -1,10 +1,10 @@
 # Generative Photomontage
-arXiv | Project Website
+arXiv | [Project Website](https://lseancs.github.io/generativephotomontage/)
 
 ## Setup
 
 Tested on CUDA 12.0 with Ubuntu 20.04.6 LTS. 
-Python 3.9, Diffusers 0.22.0. GPU: NVIDIA A10.
+Python 3.9, Diffusers 0.22.0. GPU: NVIDIA A10 or A6000.
 
 Step 1: Environment setup
 ```
