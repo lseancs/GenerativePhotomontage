@@ -1,5 +1,7 @@
 # Generative Photomontage
-arXiv | [**Project Website**](https://lseancs.github.io/generativephotomontage/)
+[**arXiv**](https://arxiv.org/abs/2408.07116) | [**Project Website**](https://lseancs.github.io/generativephotomontage/)
+
+Sean J. Liu, Nupur Kumari, Ariel Shamir, and Jun-Yan Zhu
 
 ![teaser](https://lseancs.github.io/generativephotomontage/images/teaser.jpg)
 We introduce **Generative Photomontage**, a framework which allows users to create their desired image by _compositing_ multiple generated images. Our framework is flexible and can be used for various applications, such as generating unseen appearance combinations (a, c), correcting shapes and removing artifacts (b, d).
