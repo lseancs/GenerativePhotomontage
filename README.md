@@ -1,5 +1,5 @@
 # Generative Photomontage
-[**arXiv**](https://arxiv.org/abs/2408.07116) | [**Project Website**](https://lseancs.github.io/generativephotomontage/)
+[**Paper**](https://arxiv.org/abs/2408.07116) | [**Project Website**](https://lseancs.github.io/generativephotomontage/)
 
 Sean J. Liu, Nupur Kumari, Ariel Shamir, and Jun-Yan Zhu
 
