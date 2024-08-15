@@ -6,6 +6,22 @@ Sean J. Liu, Nupur Kumari, Ariel Shamir, and Jun-Yan Zhu
 ![teaser](https://lseancs.github.io/generativephotomontage/images/teaser.jpg)
 We introduce **Generative Photomontage**, a framework which allows users to create their desired image by _compositing_ multiple generated images. Our framework is flexible and can be used for various applications, such as generating unseen appearance combinations (a, c), correcting shapes and removing artifacts (b, d).
 
+## Results
+### Appearance Mixing
+Users can create new appearance combinations based on subjective preference. This is useful in cases where the user may not realize what they want until they see it (e.g., creative and artistic exploration).
+![appearance](https://lseancs.github.io/generativephotomontage/images/appearance.jpg)
+
+### Shape and Artifacts Correction
+ControlNet may fail to adhere to the user's input condition, especially when asked to generate objects with uncommon shapes. In such cases, our method can be used to "correct" object shapes and artifacts, given a replaceable image patch within the stack.
+![shape](https://lseancs.github.io/generativephotomontage/images/shape.jpg)
+
+### Prompt Alignment
+ControlNet may struggle to follow all aspects of long complicated prompts (a).
+Using our method, users can create the desired image by breaking it up into simpler prompts and selectively combining the outputs (b).
+![prompt](https://lseancs.github.io/generativephotomontage/images/prompt1.jpg)
+![prompt2](https://lseancs.github.io/generativephotomontage/images/prompt2.jpg)
+
+
 ## Setup
 
 Tested on CUDA 12.0 with Ubuntu 20.04.6 LTS. 
