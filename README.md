@@ -3,7 +3,7 @@
 
 Sean J. Liu, Nupur Kumari, Ariel Shamir, and Jun-Yan Zhu
 
-https://github.com/user-attachments/assets/dcedd639-42b4-49e1-85ec-2d732d59afeb
+https://github.com/user-attachments/assets/44e896e3-510e-4909-86cc-1221b4b0968d
 
 ## Results
 ### Appearance Mixing
